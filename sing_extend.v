@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 16:57:58
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: sing_extend
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
-);
+module sing_extend(
 
-output [31:0] out32;
-input [15:0] in16;
 
-assign out32 = {{16{in16[15]}},in16};
 
-endmodule
+

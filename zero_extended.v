@@ -21,13 +21,6 @@
 
 
 module zero_extended(
-entrada,
-salida
-);
 
-input [15:0] entrada;
-output [31:0] salida;
-assign salida= {{16{1'b0}},entrada};
-endmodule
 
 

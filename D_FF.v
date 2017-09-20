@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 21:56:55
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: D_FF
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,20 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module D_FF(
+q,
+d, 
+reset, 
+clk
 );
-
-output [31:0] out32;
-input [15:0] in16;
-
-assign out32 = {{16{in16[15]}},in16};
+output q;
+input d, reset, clk;
+reg q; // Indicate that q is stateholding
+ 
+always @(posedge clk or posedge reset)
+if (reset)
+q = 0; // On reset, set to 0
+else
+q = d; // Otherwise out = d
 
 endmodule

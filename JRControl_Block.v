@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 22:23:58
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: JRControl_Block
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,26 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module JRControl_Block(
+JRControl, 
+ALUOp, 
+Function
 );
 
-output [31:0] out32;
-input [15:0] in16;
+output JRControl;
+reg JRControl;
+input [1:0] ALUOp;
+input [5:0] Function;
+wire [7:0] test;
 
-assign out32 = {{16{in16[15]}},in16};
+assign test = {ALUOp,Function};
 
+always @(test)
+
+case (test)
+ 8'b10001000 : JRControl=1'b1; 
+ default: JRControl=1'b0;
+ 
+ endcase
+ 
 endmodule

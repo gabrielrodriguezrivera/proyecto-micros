@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 21:50:29
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: RegBit
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,24 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module RegBit(
+BitOut,
+BitData,
+WriteEn,
+reset,
+clk
 );
 
-output [31:0] out32;
-input [15:0] in16;
+output BitOut; // 1 bit of register
+input BitData, WriteEn; 
+input reset,clk;
+wire d,f1, f2; // input of D Flip-Flop
+wire reset; 
 
-assign out32 = {{16{in16[15]}},in16};
+//assign reset=0;
+and #(50) U1(f1, BitOut, (~WriteEn));
+and #(50) U2(f2, BitData, WriteEn);
+or  #(50) U3(d, f1, f2);
 
+D_FF DFF0(BitOut, d, reset, clk);
 endmodule

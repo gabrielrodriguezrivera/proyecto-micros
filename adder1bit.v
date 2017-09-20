@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 21:46:34
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: adder1bit
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,24 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module adder1bit(
+sum,
+cout,
+a,
+b,
+cin
 );
 
-output [31:0] out32;
-input [15:0] in16;
+input   a,b,cin;
+output  cout,sum;
 
-assign out32 = {{16{in16[15]}},in16};
+// sum = a xor b xor cin
+xor #(50) (sum,a,b,cin);
+
+// carry out = a.b + cin.(a+b)
+and #(50) and1(c1,a,b);
+or #(50) or1(c2,a,b);
+and #(50) and2(c3,c2,cin);
+or #(50) or2(cout,c1,c3);
 
 endmodule

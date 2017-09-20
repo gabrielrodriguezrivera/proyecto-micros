@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 22:48:38
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: alu1bit
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,28 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module alu1bit(
+result,
+crrout,
+a,
+b,
+carryin,
+less,
+ALUControl
 );
 
-output [31:0] out32;
-input [15:0] in16;
+output result,crrout;
 
-assign out32 = {{16{in16[15]}},in16};
+input a,b,carryin,less;
+
+input [1:0] ALUControl;
+
+addsub add1(addsubOut,crrout,a,b,carryin,ALUControl[1]);
+
+xor #(50) xor1(xorOut,a,b);
+
+mux21 mux2(xorlessOut,xorOut,less,ALUControl[1]);
+
+mux21 mux3(result,addsubOut,xorlessOut,ALUControl[0]);
 
 endmodule
