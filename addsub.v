@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 16:29:39
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: addsub
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,24 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module addsub(
+out,
+cout,
+a,
+b,
+cin,
+selec
 );
 
-output [31:0] out32;
-input [15:0] in16;
+input a,b,cin,selec;
+output out,cout; 
+not #(50) not1(notb,b);
+mux21 mux1(b1,b,notb,select);
 
-assign out32 = {{16{in16[15]}},in16};
+adder adder1(out,cout,a,b1,cin);
 
 endmodule
+
+
+
+

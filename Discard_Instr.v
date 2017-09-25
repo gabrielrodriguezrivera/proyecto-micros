@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 22:25:00
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: Discard_Instr
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module Discard_Instr(
+ID_flush,
+IF_flush,
+jump,
+bne,
+jr
 );
 
-output [31:0] out32;
-input [15:0] in16;
-
-assign out32 = {{16{in16[15]}},in16};
+output ID_flush,IF_flush;
+input jump,bne,jr;
+or #50 OR1(IF_flush,jump,bne,jr);
+or #50 OR2(ID_flush,bne,jr);
 
 endmodule

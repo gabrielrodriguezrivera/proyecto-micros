@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 22:22:56
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: zero_extend
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module zero_extend(
+entrada,
+salida
 );
 
-output [31:0] out32;
-input [15:0] in16;
-
-assign out32 = {{16{in16[15]}},in16};
-
+input [15:0] entrada;
+output [31:0] salida;
+assign salida= {{16{1'b0}},entrada};
 endmodule

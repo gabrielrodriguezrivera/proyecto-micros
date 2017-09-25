@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 17:05:33
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: mux2_1
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,15 +19,21 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+// ESTE MUX SE ENCARGA DE QUE SI SEL ES 0 A ES 0 Y SI SEL ES 1 B ES 0
 
-module sign_extend(
-out32,
-in16
+module mux2_1(
+O,
+A,
+B,
+sel
 );
 
-output [31:0] out32;
-input [15:0] in16;
+output O;
+input A,B,sel;
 
-assign out32 = {{16{in16[15]}},in16};
+not #(50) not1(nsel,sel);
+and #(50) and1(O1,A,nsel); 
+and #(50) and2(O2,B,sel);
+or #(50) or2(O,O1,O2);
 
 endmodule

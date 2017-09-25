@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 19.09.2017 22:21:51
+// Create Date: 19.09.2017 21:55:14
 // Design Name: 
-// Module Name: sign_extend
+// Module Name: andmore
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,14 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sign_extend(
-out32,
-in16
+module andmore(
+g,
+a,
+b,
+c,
+d,
+e
 );
 
-output [31:0] out32;
-input [15:0] in16;
-
-assign out32 = {{16{in16[15]}},in16};
-
+output g;
+input a,b,c,d,e;
+and #(50) and1(f1,a,b,c,d),
+          and2(g,f1,e);
 endmodule
